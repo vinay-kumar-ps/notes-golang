@@ -25,6 +25,14 @@ func createNote(c *gin.Context) {
 	c.JSON(201, newNote)
 }
 
+func getNotes(c gin.Context) {
+	var allNotes []Note
+	for _, note := range notes {
+		allNotes = append(allNotes, note)
+	}
+	c.JSON(200, allNotes)
+}
+
 func main() {
 	r := gin.Default()
 
@@ -35,5 +43,6 @@ func main() {
 	})
 
 	r.POST("/notes", createNote)
+	r.GET("/notes", getNotes)
 	r.Run(":8080")
 }
